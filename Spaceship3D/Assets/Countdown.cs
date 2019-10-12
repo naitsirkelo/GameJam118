@@ -12,15 +12,17 @@ public class Countdown : MonoBehaviour {
 
     public float timeLeft = 5.0f;
     public Text startText;
+    public GameObject fuel;
+    public GameObject timeBox;
 
     public double spaceHits = 0;
+    int hitMultiplier = 3;
 
     // Start is called before the first frame update
     void Start() {
 
         shipMovement = ship.GetComponent<ShipMovement>();
         shipController = ship.GetComponent<ShipController>();
-
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class Countdown : MonoBehaviour {
 
             if (Input.GetKeyDown("space")) {
                 spaceHits++;
+                fuel.transform.position += new Vector3(0, 1 * hitMultiplier, 0);
             }
 
         }
@@ -41,6 +44,7 @@ public class Countdown : MonoBehaviour {
         if (timeLeft <= -2f) {
 
            startText.GetComponent<Text>().enabled = false;
+           timeBox.GetComponent<Image>().enabled = false;
 
        } else if (timeLeft <= -1f) {
 

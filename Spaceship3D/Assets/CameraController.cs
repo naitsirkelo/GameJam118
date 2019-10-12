@@ -8,23 +8,32 @@ public class CameraController : MonoBehaviour {
     float MaxToClamp = 10f;
     float ROTSpeed = 5f;
     float minDist = -8f;
-    float maxDist = -40f;
+    float maxDist = -30f;
+    bool reachedTop = false;
 
     Transform cam;
     public Transform target;
+    public Transform boatTarget;
 
     // Start is called before the first frame update
     void Start() {
 
         cam = Camera.main.transform;
-
     }
 
     // Update is called once per frame
     void Update() {
 
-        Vector3 targetPosition = new Vector3(target.position.x + 1.24f, target.position.y, cam.position.z);
-        cam.position = targetPosition;
+        if (reachedTop) {
+
+            target = boatTarget;
+        }
+
+        if (target.position.y >= cam.position.y) {
+
+            Vector3 targetPosition = new Vector3(target.position.x + 1.24f, target.position.y, cam.position.z);
+            cam.position = targetPosition;
+        }
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0  && cam.position.z > maxDist) {
 
@@ -41,6 +50,12 @@ public class CameraController : MonoBehaviour {
             var translate = Mathf.Min(Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")), MaxToClamp - Mathf.Abs(ZoomAmount));
             gameObject.transform.Translate(0, 0, translate * ROTSpeed * Mathf.Sign(Input.GetAxis("Mouse ScrollWheel")));
         }
+
+    }
+
+    public void ReachedTop() {
+
+        reachedTop = true;
 
     }
 
