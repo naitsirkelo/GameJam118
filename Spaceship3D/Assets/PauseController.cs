@@ -9,6 +9,12 @@ public class PauseController : MonoBehaviour {
 
     public GameObject pauseMenu;
 
+    void Start() {
+
+        Resume();
+
+    }
+
     void Update() {
 
         if (Input.GetKeyDown(KeyCode.Escape)) {

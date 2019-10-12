@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour {
 
     public Rigidbody rb;
-    float yForce = 1.5f;
+    float yForce = 4f;
 
     // Start is called before the first frame update
     void Start() {
@@ -14,18 +14,10 @@ public class ShipMovement : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    void Update() {
-
-        if (Input.GetKeyDown("space")) {
-            //rb.velocity = new Vector3(0, yForce, 0);
-        }
-
-    }
-
     public void Launch(double power) {
 
         rb.velocity = new Vector3(0, (float) power * yForce, 0);
+        Time.timeScale = 0.75f;
         Debug.Log("LAUNCH");
 
     }
