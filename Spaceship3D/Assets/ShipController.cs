@@ -21,7 +21,6 @@ public class ShipController : MonoBehaviour {
         if (show) {
 
             heightText.GetComponent<Text>().enabled = true;
-            //heightText.text = "Height:\n";
             heightText.text = System.Math.Round(height).ToString();
 
         } else {

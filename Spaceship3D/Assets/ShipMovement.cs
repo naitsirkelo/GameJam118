@@ -5,25 +5,29 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour {
 
     public Rigidbody rb;
-    float yForce = 10f;
+    float yForce = 5.75f;
     bool launched = false;
-    float winHeight = 20f;
+    float winHeight = 1420f;
+    bool detach = false;
 
     public GameObject ship;
+    public GameObject rocket;
     private GameController gameController;
     private CameraController cameraController;
     private GameOverController gameOver;
     private ShipController shipController;
-    private RocketMovement rocketMovement;
 
     public bool movingDown;
     public Vector3 LastPOS;
     public Vector3 NextPOS;
 
+    static AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start() {
 
         rb = GetComponent<Rigidbody>();
+        audioSource = gameObject.GetComponent<AudioSource>();
 
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         if (gameControllerObject != null) {
@@ -32,15 +36,6 @@ public class ShipMovement : MonoBehaviour {
         } else {
 
             Debug.Log("No GameController");
-        }
-
-        GameObject rocketObject = GameObject.FindWithTag("Rocket");
-        if (rocketObject != null) {
-
-            rocketMovement = rocketObject.GetComponent<RocketMovement>();
-        } else {
-
-            Debug.Log("No RocketMovement");
         }
 
         GameObject gameOverObject = GameObject.FindWithTag("GameOverController");
@@ -66,11 +61,17 @@ public class ShipMovement : MonoBehaviour {
         NextPOS.y = transform.position.y;
     }
 
-    public void Launch(double power) {
+    public void Launch(double hits) {
 
         launched = true;
-        rb.velocity = new Vector3(0, (float) power * yForce, 0);
+        int powerLevel = PlayerPrefs.GetInt("Power", 1);
+        rb.velocity = new Vector3(0, (float) (hits * yForce * powerLevel), 0);
         Time.timeScale = 0.75f;
+    }
+
+    public void LaunchAudio() {
+
+        audioSource.Play();
     }
 
     void LateUpdate() {
@@ -95,9 +96,16 @@ public class ShipMovement : MonoBehaviour {
         if (transform.position.y > winHeight) {
 
             ship.GetComponent<SpriteRenderer>().enabled = false;
+
             cameraController.ReachedTop();
             gameController.Show();
-            //rocketMovement.Launch();
+
+            if (!detach) {
+
+                Instantiate(rocket, new Vector3(1, winHeight, 0.4f), Quaternion.identity);
+                detach = true;
+            }
+
         }
 
     }

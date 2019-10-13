@@ -9,6 +9,8 @@ public class GameOverController : MonoBehaviour {
     public GameObject gameOverMenu;
     public Text heightText;
 
+    private StoreController storeController;
+
     public void Start() {
 
         gameOverMenu.SetActive(false);
@@ -24,7 +26,17 @@ public class GameOverController : MonoBehaviour {
 
     public void ToStore() {
 
+        GameObject storeObject = GameObject.FindWithTag("StoreController");
+        if (storeObject != null) {
 
+            storeController = storeObject.GetComponent<StoreController>();
+        } else {
+
+            Debug.Log("No GameController");
+        }
+
+        storeController.ToStore();
+        gameOverMenu.SetActive(false);
     }
 
     public void RestartFromGameOver() {

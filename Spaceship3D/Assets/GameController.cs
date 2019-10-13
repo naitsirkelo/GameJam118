@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 
     public int money = 0;
+    public int multiplier = 30;
     public Text moneyText;
     public GameObject boat;
-    public GameObject rocket;
+    public GameObject music;
 
     void Start() {
 
         boat.GetComponent<SpriteRenderer>().enabled = false;
-        rocket.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame
@@ -27,14 +27,13 @@ public class GameController : MonoBehaviour {
 
     public void UpdateMoney(double height) {
 
-        money += (int)height * 10;
+        money += (int)height * multiplier;
         PlayerPrefs.SetInt("Money", money);
     }
 
     public void Show() {
 
         boat.GetComponent<SpriteRenderer>().enabled = true;
-        rocket.GetComponent<SpriteRenderer>().enabled = true;
     }
 
 }

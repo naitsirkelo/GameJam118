@@ -5,17 +5,28 @@ using UnityEngine;
 public class RocketMovement : MonoBehaviour {
 
     public Rigidbody rb;
-    float xForce = 1f;
-    float yForce = 2f;
+
+    Vector3 launch;
+    float xForce = 4f;
+    float yForce = 10f;
+
+    bool detach = false;
 
     // Start is called before the first frame update
     void Start() {
 
         rb = GetComponent<Rigidbody>();
+        launch = new Vector3(xForce, yForce, 0);
     }
 
-    public void Launch() {
+    void FixedUpdate() {
 
-        rb.velocity = new Vector3(xForce, yForce, 0);
+        if (!detach) {
+
+            rb.AddForce(xForce, yForce, 0, ForceMode.Impulse);
+            detach = true;
+        }
+
     }
+
 }

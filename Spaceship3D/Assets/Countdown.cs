@@ -16,7 +16,7 @@ public class Countdown : MonoBehaviour {
     public GameObject timeBox;
 
     public double spaceHits = 0;
-    int hitMultiplier = 3;
+    int hitMultiplier = 4;
 
     // Start is called before the first frame update
     void Start() {
@@ -36,7 +36,8 @@ public class Countdown : MonoBehaviour {
 
             if (Input.GetKeyDown("space")) {
                 spaceHits++;
-                fuel.transform.position += new Vector3(0, 1 * hitMultiplier, 0);
+                fuel.transform.position += new Vector3(0, hitMultiplier, 0);
+                Debug.Log(fuel.transform.position.y);
             }
 
         }
@@ -55,6 +56,7 @@ public class Countdown : MonoBehaviour {
         } else if (timeLeft <= 0f) {
 
             startText.text = "LIFT OFF";
+            shipMovement.LaunchAudio();
 
         }
 
