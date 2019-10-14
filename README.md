@@ -25,9 +25,11 @@ Theme: Spaceship.
 
 ## Getting Started
 
-- Download: git clone https://github.com/naitsirkelo/GameJam118.git
-- Play: Spaceship3D_real.exe
-- Spaceship3D.exe has enhanced rocket power to reach the goal faster
+```
+git clone https://github.com/naitsirkelo/GameJam118.git
+```
+- Run: **Spaceship3D_real.exe**
+- **Spaceship3D.exe** has enhanced rocket power to reach the goal faster
 
 ## Built With
 
