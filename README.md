@@ -7,7 +7,7 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-https://img.shields.io/badge/contributors-2-green.svg
+![Contributors](https://img.shields.io/badge/contributors-2-green.svg)
 ![Build Status](https://img.shields.io/badge/build-running-green.svg)
 
 
